@@ -1,2 +1,2 @@
-# Django Viode Membership
+# Django Video Membership
 
