@@ -6,13 +6,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <title>カスタム認証チュートリアル</title>
+    <title>Djangoスタートアップ</title>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+    <nav class="flex items-center justify-between flex-wrap bg-teal-500 p-6">
+        <div class="flex items-center flex-shrink-0 text-white mr-6">
+            <a href="{% url 'index' %}">
+                <span class="font-semibold text-xl tracking-tight">Djangoスタートアップ</span>
+            </a>
+        </div>
+        <div class="block lg:hidden">
+            <button
+                class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
+                <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <title>Menu</title>
+                    <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+                </svg>
+            </button>
+        </div>
+        <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+            <div class="text-sm lg:flex-grow">
+                <a href="{% url 'courses' %}"
+                    class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                    Courses
+                </a>
+                {% if user.is_authenticated %}
+                <a href="{% url 'profile' %}"
+                    class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                    Profile
+                </a>
+                <a href="{% url 'index' %}"
+                    class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                    Enroll
+                </a>
+                <a href="{% url 'account_logout' %}"
+                    class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                    Logout
+                </a>
+                {% endif %}
+            </div>
+            <div>
+                {% if not user.is_authenticated %}
+                <a href="{% url 'account_login' %}"
+                    class="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">
+                    Login
+                </a>
+                {% endif %}
+            </div>
+        </div>
+        </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+        </div>   
+    </main>
+
+    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="/"></a>
             <ul class="navbar-nav ml-auto">
@@ -38,19 +96,12 @@
         </div>
     </nav>
 
-    <main>
-        <div class="container">
-            {% block content %}
-            {% endblock %}
-        </div>   
-    </main>
-
     <footer class="py-2 bg-dark">
         <p class="m-0 text-center text-white">Copyright &copy; Django Startup 2020</p>
     </footer>
 
     {% block extra_js %}
-    {% endblock %}
+    {% endblock %} -->
 </body>
 
 </html>
